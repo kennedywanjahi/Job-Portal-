@@ -1,5 +1,5 @@
 <?php
-include 'includes/header.php';
+include 'header.php';
 if (isset($_GET['source'])) {
   $source = $_GET['source'];
 }else {
@@ -19,4 +19,11 @@ if (isset($_GET['source'])) {
       include 'includes/login.php';
       break;
   }
+include 'includes/footer.php';
+if (isset($_GET['q'])){
+    $user->user_logout();
+    echo "<script>alert('log out successful');</script>";
+    echo '<script>window.location="index.php" </script>';
+
+}
   ?>

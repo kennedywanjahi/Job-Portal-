@@ -1,6 +1,16 @@
 <?php
-include 'includes/header.php';
- ?>
+    include 'header.php';
+
+    if (isset($_SESSION['uid'])) {
+      $uid = $_SESSION['uid'];
+      $user->get_fullname($uid);
+    }
+
+
+
+
+?>
+
 
         <div class="slider-area">
             <div class="slider">
@@ -234,4 +244,5 @@ include 'includes/header.php';
 
         </div>
         <?php
+
         include 'includes/footer.php'; ?>
