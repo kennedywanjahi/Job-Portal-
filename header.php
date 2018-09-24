@@ -54,7 +54,7 @@ $user = new User();
 				                        <span><a href='account.php?q'><i class='fa fa-power-off'></i> Log Out</a></span>
                               <?php } else {
                                 ?>
-                                <span><a href="#"><i class=" fa fa-user"></i> My Account</a></span>
+                                <span><a href="account.php"><i class=" fa fa-user"></i> My Account</a></span>
                               <?php } ?>
                             </p>
                         </div>
