@@ -28,14 +28,14 @@ if (isset($_GET['source'])) {
   $source = '';
 }
   switch ($source) {
-    case 'add_job':
+    case 'add_jobs':
     include "includes/add_jobs.php";
     break;
     case 'edit_job':
     include "includes/edit_jobs.php";
     break;
-    case '150':
-    echo "NICE 100";
+    case 'active_jobs':
+    include "includes/active_jobs.php";
     break;
 
     default:
