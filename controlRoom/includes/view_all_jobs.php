@@ -58,10 +58,10 @@
 
 
 <?php
-      if (isset($_GET['delete'])) {
-      $the_order_id = $_GET['delete'];
-      $query = "DELETE FROM orders WHERE order_id = {$the_order_id}";
-      $delete_query = mysqli_query($connection, $query);
-      echo '<script>window.location="orders.php" </script>';
-      }
-?>
+if (isset($_GET['delete'])) {
+  $jobId = $_GET['delete'];
+  $query = "DELETE FROM jobs WHERE Id = $jobId";
+  $deleteCompany = mysqli_query($connection, $query);
+  echo '<script>window.location="jobs.php" </script>';
+}
+ ?>

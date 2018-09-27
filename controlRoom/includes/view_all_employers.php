@@ -44,12 +44,11 @@
   </tbody>
 </table>
 
-
-
-
 <?php
-      if (isset($_GET['delete'])) {
-      $the_user_id = $_GET['delete'];
-      $query = "DELETE FROM users WHERE Email = {$the_user_id}";
-      $delete_query = mysqli_query($connection, $query);
-      }
+if (isset($_GET['delete'])) {
+  $companyId = $_GET['delete'];
+  $query = "DELETE FROM employers WHERE Id = $companyId";
+  $deleteCompany = mysqli_query($connection, $query);
+  echo '<script>window.location="employers.php" </script>';
+}
+ ?>

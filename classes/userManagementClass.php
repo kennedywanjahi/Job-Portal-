@@ -9,7 +9,7 @@
 
 		/*** for registration process ***/
 
-		public function reg_user($name,$mobile,$email,$password,$usergroup){
+		public function reg_user($name,$mobile,$email,$password){
 			//echo "k";
 
 			$password = md5($password);
@@ -24,7 +24,7 @@
 			//if the username is not in db then insert to the table
 
 			if($count_row == 0){
-				$query = "INSERT INTO users SET Name='$name', Mobile='$mobile', Email='$email', Password='$password', Usergroup ='$usergroup'";
+				$query = "INSERT INTO users SET Name='$name', Mobile='$mobile', Email='$email', Password='$password'";
 
 				$result = $this->db->query($query) or die($this->db->error);
 

@@ -64,8 +64,6 @@ if (isset($_GET['source'])) {
 
                     </div
 
-                </div>
-                <!-- /.row -->
 
             </div>
             <!-- /.container-fluid -->

@@ -2,6 +2,7 @@
 session_start();
 include '../includes/db.php';
 include '../classes/userManagementClass.php';
+include '../functions.php';
 $user = new User();
 
  ?>

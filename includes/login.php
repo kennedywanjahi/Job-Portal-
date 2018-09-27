@@ -7,7 +7,7 @@ if (isset($_POST['login'])) {
   	    if ($login) {
   	        // Login Success
   	       echo "<script>alert('login successful');</script>";
-           header("Location: ./index.php");
+           echo '<script>window.location="./index.php" </script>';
   	    } else {
   	        // Login Failed
             echo "<script>alert('invalid credentials check and try again.');</script>";
@@ -20,17 +20,12 @@ if (isset($_POST['login'])) {
  <div class="slider-area">
 
 <br>
-                     <form action="" class=" form-inline">
-
-
-
-                     </form>
                      <div class="col-md-3">
                      </div>
                      <div class="col-md-6">
 <div class="woocommerce-info"><h4>Returning customer? Login</h4>
 </div>
-
+<hr>
 <form id="" class="" method="post">
 
 
@@ -57,6 +52,8 @@ if (isset($_POST['login'])) {
 
 <div class="clear"></div>
 </form>
+<br>
+<hr>
 <h3>New Customer? <a href="account.php?source=register">Register</h3></a>
 </div>
                  </div>

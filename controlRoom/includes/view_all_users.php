@@ -29,7 +29,7 @@
                   echo "<td>{$db_availability}</td>";
                   echo "<td>{$db_subscription}</td>";
                   echo "<td><a href='users.php?source=edit_user&user_id={$db_Email}'>Edit</a></td>";
-                  echo "<td><a href='products.php?delete={$db_Email}'>Delete</a></td>";
+                  echo "<td><a href='users.php?delete={$db_Email}'>Delete</a></td>";
 
 
 
@@ -46,8 +46,10 @@
 
 
 <?php
-      if (isset($_GET['delete'])) {
-      $the_user_id = $_GET['delete'];
-      $query = "DELETE FROM users WHERE Email = {$the_user_id}";
-      $delete_query = mysqli_query($connection, $query);
-      }
+if (isset($_GET['delete'])) {
+  $userId = $_GET['delete'];
+  $query = "DELETE FROM users WHERE Email = '$userId'";
+  $deleteUser = mysqli_query($connection, $query);
+  echo '<script>window.location="users.php" </script>';
+}
+ ?>

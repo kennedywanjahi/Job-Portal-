@@ -32,7 +32,7 @@ include 'includes/admin_top_navigation.php';
 
                                <?php
 
-                                 $query = "SELECT * FROM jobs";
+                                 $query = "SELECT * FROM jobs WHERE Status = 1";
                                  $select_all_jobs = mysqli_query($connection,$query);
                                  $jobs_count = mysqli_num_rows($select_all_jobs);
 
@@ -41,11 +41,11 @@ include 'includes/admin_top_navigation.php';
                                  ?>
 
 
-                                 <div>JOBS</div>
+                                 <div>OPEN POSITIONS</div>
                              </div>
                          </div>
                      </div>
-                     <a href="jobs.php">
+                     <a href="jobs.php?source=active_jobs">
                          <div class="panel-footer">
                              <span class="pull-left">View Details</span>
                              <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

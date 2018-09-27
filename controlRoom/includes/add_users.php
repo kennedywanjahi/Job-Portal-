@@ -1,107 +1,103 @@
 <?php
 if (isset($_POST['add_user'])) {
-  $Firstname = mysqli_real_escape_string($connection, $_POST['fname']);
-  $Lastname = mysqli_real_escape_string($connection, $_POST['lname']);
-  $Mobile = mysqli_real_escape_string($connection, $_POST['mobile']);
-  $Email = mysqli_real_escape_string($connection, $_POST['email']);
-  $usergroup = mysqli_real_escape_string($connection, $_POST['usergroup']);
-  $County = mysqli_real_escape_string($connection, $_POST['county']);
-  $Town = mysqli_real_escape_string($connection, $_POST['town']);
-  $Street = mysqli_real_escape_string($connection, $_POST['street']);
-  $Building = mysqli_real_escape_string($connection, $_POST['building']);
-  $Password = mysqli_real_escape_string($connection, $_POST['password']);
-  $Password2 = mysqli_real_escape_string($connection, $_POST['confirmpassword']);
-  $Password1 = md5($Password);
-  $Password2 = md5($Password2);
-       if ($Password1 === $Password2) {
-          $query = "INSERT INTO users(`Fname`, `Lname`, `Mobile`, `Email`, `usergroup`, `County`, `Town`, `Street`, `Building`, `password`)";
-          $query .="VALUES ('{$Firstname}', '{$Lastname}', '{$Mobile}', '{$Email}', '{$usergroup}', '{$County}',
-          '{$Town}', '{$Street}', '{$Building}', '{$Password1}')";
-           $add_user_query= mysqli_query($connection, $query);
+  // Checking for user logged in or not
+      /*if (!$user->get_session())
+      {
+         header("location:index.php");
+      }*/
 
-           if(!$add_user_query){
-             die("QUERY FAILED" .mysqli_error($connection));
-           }
-           echo "<h1>User Added successfully</h1>" ;
-         }else {
-           echo "passwords do not match";
-         }
-         echo '<script>window.location="users.php" </script>';
+          $name = $_POST["name"];
+          $mobile = $_POST["mobile"];
+          $email = $_POST["email"];
+          $password = $_POST["password1"];
+          $password2 = $_POST["password2"];
+          echo $usergroup = $_POST["usergroup"];
+          if ($password === $password2) {
+            $register = $user->reg_user($name, $mobile, $email, $password, $usergroup);
+            if ($register) {
+                // Registration Success
+                echo "<div style='text-align:center'>Registration successful <a href='./account.php?source=login'>Click here</a> to login</div>";
+            } else {
+                // Registration Failed
+                echo "<div style='text-align:center'>Registration failed. Email or Username already exits please try again.</div>";
+            }
+
+          } else {
+            echo "failed";
+            echo "<script>alert('Passwords do not match check and try again');</script>";
+      echo '<script>window.history.go(-1); </script>';
+          }
 }
+ ?>
 
 
 
 
 
 
- ?><h1 class="page-header">Add USER
-<small>Page</small>
-<div class="col-sm-3 user_image_box">
-  <span class="fa fa-user fa-1x"></span>
+ <div class="slider-area">
+
+
+                          <form action="" class=" form-inline">
+
+
+
+                          </form>
+                          <div class="col-md-3">
+                          </div>
+                          <div class="col-md-6">
+<div class="woocommerce-info"><h2 style="text-align:center">Add User Account</h2></a>
 </div>
- </h1>
- <br>
-<br>
- <br>
- <br>
+
+<form id="" class="" method="post">
+   <div class="form-group">
+
+                              <h4>Are adding an Adminstrator or a Job Seeker Account</h4>
+
+                          <select class="form-control" size="" name="usergroup" id="usergroup">
+                             <option selected value="Job Seeker">Click To Choose Role</option>
+                        <option value="Job Seeker">Job Seeker</option>
+                        <option value="Admin">Admin</option>
+                           </select>
+   </div>
+   <br>
+     <div class="form-group">
+       <label class="" for="name">Name <abbr title="required" class="required">*</abbr>
+              </label>
+         <input type="text" value="" placeholder="" id="name" name="name" class="form-control" placeholder="Email" required>
+     </div>
+     <div class="form-group">
+         <label class="" for="mobile">Mobile Phone Number <abbr title="required" class="required">*</abbr>
+         </label>
+         <input type="text" value="+2547" placeholder="" id="mobile" class="form-control" name="mobile" placeholder="+254" required>
+     </div>
+     <div class="form-group">
+         <label for="username">Email <span class="required">*</span>
+         </label>
+         <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
+     </div>
+     <div class="form-group">
+         <label for="password1">Password <span class="required">*</span>
+         </label>
+         <input type="password" id="password1" name="password1" class="form-control" placeholder="Password" required>
+     </div>
+     <div class="form-group">
+         <label for="password2">Confirm Password <span class="required">*</span>
+         </label>
+         <input type="password" id="password2" name="password2" class="form-control" placeholder="Password" required>
+     </div>
+     <div class="clear"></div>
+     <p class="form-row">
+                         <input type="submit" value="REGISTER" name="register" class="btn btn-info">
+
+                     </p>
+
+                 </div>
+               </form>
+     <div class="clear"></div>
+ </form>
+</div>
+                        </div>
 
 
-
-
-
-
-<form action="" method="post" enctype="multipart/form-data">
-  <div class="form-group">
-    <label for="fname">First Name</label>
-    <input type="text" name="fname" class="form-control" required>
-  </div>
-  <div class="form-group">
-    <label for="lname">Last Name</label>
-    <input type="text" name="lname" class="form-control" required>
-  </div>
-  <div class="form-group">
-    <label for="mobile">Mobile</label>
-    <input type="text" name="mobile" class="form-control" value="+2547">
-  </div>
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input type="email" name="email" class="form-control" placeholder="______@__com">
-  </div>
-  <div class="form-group">
-    <label for="usergroup">Usergroup</label> <br>
-    <select name="usergroup">
-      <option value="admin">Admin</option>
-      <option value="customer">Customer</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="county">County</label>
-    <input type="text" name="county" class="form-control">
-  </div>
-  <div class="form-group">
-    <label for="town">Town</label>
-    <input type="text" name="town" class="form-control">
-  </div>
-  <div class="form-group">
-    <label for="street">Street</label>
-    <input type="text" name="street" class="form-control">
-  </div>
-  <div class="form-group">
-    <label for="building">Building</label>
-    <input type="text" name="building" class="form-control">
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" name="password" class="form-control">
-  </div>
-  <div class="form-group">
-    <label for="confirmpassword">Confirm Password</label>
-    <input type="password" name="confirmpassword" class="form-control">
-  </div>
-
-
-  <div class="form-group">
-    <input class="btn btn-primary" type="submit" name="add_user" value="ADD USER">
-  </div>
-
-</form>
+        </div>

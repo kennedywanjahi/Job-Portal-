@@ -12,9 +12,8 @@ if (isset($_POST['register'])) {
           $email = $_POST["email"];
           $password = $_POST["password1"];
           $password2 = $_POST["password2"];
-          $usergroup = $_POST["usergroup"];
           if ($password === $password2) {
-            $register = $user->reg_user($name, $mobile, $email, $password, $usergroup);
+            $register = $user->reg_user($name, $mobile, $email, $password );
             if ($register) {
                 // Registration Success
                 echo "<div style='text-align:center'>Registration successful <a href='./account.php?source=login'>Click here</a> to login</div>";
@@ -38,30 +37,18 @@ if (isset($_POST['register'])) {
  <div class="slider-area">
 
 
-                          <form action="" class=" form-inline">
 
-
-
-                          </form>
                           <div class="col-md-3">
                           </div>
                           <div class="col-md-6">
 <div class="woocommerce-info"><h2 style="text-align:center">Registration</h2></a>
 </div>
+<hr>
 
 <form id="" class="" method="post">
-   <div class="form-group">
-
-                              <h4>Are You an Employer or Job Seeker?</h4>
-
-                          <select class="form-control" size="" name="usergroup" id="usergroup">
-                             <option selected value="Job Seeker">Click To Choose your Role</option>
-                        <option value="Job Seeker">Job Seeker</option>
-                        <option value="Employer">Employer</option>
-                           </select>
-   </div>
    <br>
      <p>Enter Personal Details Below If you are a returning member please <a href="account.php?source=login">Login</a></p>
+<hr>
      <div class="form-group">
        <label class="" for="name">Name <abbr title="required" class="required">*</abbr>
               </label>
@@ -77,10 +64,11 @@ if (isset($_POST['register'])) {
          </label>
          <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
      </div>
+     <hr>
      <div class="form-group">
          <label for="password1">Password <span class="required">*</span>
          </label>
-         <input type="password1" id="password1" name="password1" class="form-control" placeholder="Password" required>
+         <input type="password" id="password1" name="password1" class="form-control" placeholder="Password" required>
      </div>
      <div class="form-group">
          <label for="password2">Confirm Password <span class="required">*</span>

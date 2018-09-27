@@ -2,6 +2,12 @@
 session_start();
 include_once 'classes/userManagementClass.php';
 $user = new User();
+if (isset($_SESSION['uid'])) {
+$uid = $_SESSION['uid'];
+$fullname = $user->get_fullname($uid);
+
+}
+
  ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -59,18 +65,11 @@ $user = new User();
                             </p>
                         </div>
                     </div>
+                    <?php if (!isset($_SESSION['current_user'])) {?>
                     <div class="col-md-2 col-md-offset-5  col-sm-3 col-sm-offset-1  col-xs-3  col-xs-offset-1">
-                        <div class="header-half header-social">
-                            <ul class="list-inline">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-vine"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul>
-                        </div>
+                        <a href="employers"><button class="btn btn-primary wow bounceInRight login" data-wow-delay="0.6s">FOR EMPLOYERS</button></a>
                     </div>
+                  <?php } ?>
                 </div>
             </div>
         </div>
@@ -85,7 +84,7 @@ $user = new User();
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#"><img src="img/logo.png" alt=""></a>
+              <a class="navbar-brand" href="#"><img src="img/logo.png" alt="its us"></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -97,12 +96,10 @@ $user = new User();
                 <?php } ?>
               </div>
               <ul class="main-nav nav navbar-nav navbar-right">
-                <li class="wow fadeInDown" data-wow-delay="0s"><a class="active" href="index.php">Home</a></li>
-                <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="#">Job Seekers</a></li>
-                <li class="wow fadeInDown" data-wow-delay="0.2s"><a href="#">Employeers</a></li>
-                <li class="wow fadeInDown" data-wow-delay="0.3s"><a href="#">About us</a></li>
-                <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="#">Blog</a></li>
-                <li class="wow fadeInDown" data-wow-delay="0.5s"><a href="#">Contact</a></li>
+                <li class="wow fadeInDown" data-wow-delay="0s"><a class="active" href="index.php">HOME</a></li>
+                <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="jobs.php">JOBS</a></li>
+                <li class="wow fadeInDown" data-wow-delay="0.3s"><a href="#">ABOUT US</a></li>
+                <li class="wow fadeInDown" data-wow-delay="0.3s"><a href="#">LEAVE US A MESSAGE</a></li>
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
