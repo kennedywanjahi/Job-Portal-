@@ -1,20 +1,10 @@
 <?php
 
 if (isset($_POST['login'])) {
-  $password = escape($_POST["password"]);
-  $email = escape($_POST["email"]);
-  $passwordmd5 = md5($password);
+  
   loginEmployer();
 
-  	    // if ($login) {
-  	    //     // Login Success
-  	    //    echo "<script>alert('login successful');</script>";
-        //    echo '<script>window.location="./index.php" </script>';
-  	    // } else {
-  	    //     // Login Failed
-        //     echo "<script>alert('invalid credentials check and try again.');</script>";
-        //     echo '<script>window.history.go(-1); </script>';
-  	    // }
+
 }
 
 

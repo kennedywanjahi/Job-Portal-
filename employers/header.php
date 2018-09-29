@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'includes/db.php';
 include '../functions.php';
  ?>
@@ -10,7 +11,7 @@ include '../functions.php';
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Jonaki | Job Board Template</title>
+        <title>Job Portal | Employers</title>
         <meta name="description" content="company is a free job board template">
         <meta name="author" content="Ohidul">
         <meta name="keyword" content="html, css, bootstrap, job-board">
@@ -42,22 +43,26 @@ include '../functions.php';
                 <div class="row">
                     <div class="col-md-5 col-sm-8 col-xs-8">
                         <div class="header-half header-call">
-                            <p>
-                                <span><i class="icon-cloud"></i>+019 4854 8817</span>
-                                <span><i class="icon-mail"></i>ohidul.islam951@gmail.com</span>
-                            </p>
+                          <p>
+                            <?php if (isset($_SESSION['account_operator'])) {?>
+                              <span><a href='account.php?source=profile&&user_id=<?php echo $_SESSION['account_operator']; ?>'><i class='fa fa-user'></i><?php echo $_SESSION['account_operator']; ?></a></span>
+                              <span><a href="#"><i class="fa fa-gear"></i><?php echo $_SESSION['company']; ?></a></span>
+                            <?php } else {
+                              ?>
+                              <span><a href="account.php"><i class=" fa fa-user"></i> My Account</a></span>
+                            <?php } ?>
+                          </p>
                         </div>
                     </div>
                     <div class="col-md-2 col-md-offset-5  col-sm-3 col-sm-offset-1  col-xs-3  col-xs-offset-1">
                         <div class="header-half header-social">
-                            <ul class="list-inline">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-vine"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul>
+                          <p>
+                            <?php if (isset($_SESSION['account_operator'])) {?>
+                              <span><a href='account.php?q'><i class='fa fa-power-off'></i> Log Out</a></span>
+                            <?php }
+                              ?>
+
+                          </p>
                         </div>
                     </div>
                 </div>
@@ -80,16 +85,23 @@ include '../functions.php';
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <div class="button navbar-right">
-                  <button class="navbar-btn nav-button wow bounceInRight login" data-wow-delay="0.8s">Login</button>
-                  <button class="navbar-btn nav-button wow fadeInRight" data-wow-delay="0.6s">Sign up</button>
+                <?php if (isset($_SESSION['account_operator'])) {?>
+                  <button class="navbar-btn nav-button wow bounceInRight login" data-wow-delay="0.8s">Account Status:
+                    <?php if($_SESSION['account_status'] == 0){
+
+                    echo "Not Verified";
+                  } else {
+                    echo "Verified";
+                  }?>
+                <?php }
+                  ?>
+                    </button>
               </div>
               <ul class="main-nav nav navbar-nav navbar-right">
-                <li class="wow fadeInDown" data-wow-delay="0s"><a class="active" href="#">Home</a></li>
-                <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="#">Job Seekers</a></li>
-                <li class="wow fadeInDown" data-wow-delay="0.2s"><a href="#">Employeers</a></li>
-                <li class="wow fadeInDown" data-wow-delay="0.3s"><a href="#">About us</a></li>
-                <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="#">Blog</a></li>
-                <li class="wow fadeInDown" data-wow-delay="0.5s"><a href="#">Contact</a></li>
+                <li class="wow fadeInDown" data-wow-delay="0s"><a href="#">Home</a></li>
+                <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="#">Applications</a></li>
+                <li class="wow fadeInDown" data-wow-delay="0.2s"><a href="jobs.php">Jobs</a></li>
+                <li class="wow fadeInDown" data-wow-delay="0.3s"><a href="#">User Accounts</a></li>
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
