@@ -18,6 +18,7 @@
                       <?php
                       employerViewJobs();
                        ?>
+                       </tr>
                     </tbody>
             </div>
         </div>

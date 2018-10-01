@@ -21,8 +21,8 @@ include 'header.php';
                                       include 'includes/login.php';
                                       break;
                                   }
-                                if (isset($_GET['q'])){
-                                    $user->user_logout();
+                                if (isset($_GET['logout'])){
+                                    session_destroy();
                                     echo "<script>alert('log out successful');</script>";
                                     echo '<script>window.location="index.php" </script>';
 

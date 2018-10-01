@@ -3,7 +3,7 @@ ob_start();
 include 'header.php';
 if($_SESSION['account_status'] == 0){
 
-echo '<script>window.location="index.php" </script>';
+redirect("index.php");
 }
  ?>
  <?php
@@ -20,7 +20,7 @@ echo '<script>window.location="index.php" </script>';
        include 'includes/view_all_jobs.php';
        break;
    }
- 
+
 
  ?>
 

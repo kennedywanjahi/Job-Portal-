@@ -48,9 +48,7 @@ include '../functions.php';
                               <span><a href='account.php?source=profile&&user_id=<?php echo $_SESSION['account_operator']; ?>'><i class='fa fa-user'></i><?php echo $_SESSION['account_operator']; ?></a></span>
                               <span><a href="#"><i class="fa fa-gear"></i><?php echo $_SESSION['company']; ?></a></span>
                             <?php } else {
-                              ?>
-                              <span><a href="account.php"><i class=" fa fa-user"></i> My Account</a></span>
-                            <?php } ?>
+                              } ?>
                           </p>
                         </div>
                     </div>
@@ -58,8 +56,14 @@ include '../functions.php';
                         <div class="header-half header-social">
                           <p>
                             <?php if (isset($_SESSION['account_operator'])) {?>
-                              <span><a href='account.php?q'><i class='fa fa-power-off'></i> Log Out</a></span>
-                            <?php }
+                              <span><a href='index.php?logout'><i class='fa fa-power-off'></i> Log Out</a></span>
+                            <?php }else {
+                              ?>
+                              <div class="col-md-2 col-md-offset-5  col-sm-3 col-sm-offset-1  col-xs-3  col-xs-offset-1">
+                                  <a href="../index.php"><button class="btn btn-primary wow bounceInRight login" data-wow-delay="0.6s">FOR JOB SEEKERS</button></a>
+                              </div>
+                              <?php
+                            }
                               ?>
 
                           </p>
@@ -97,12 +101,14 @@ include '../functions.php';
                   ?>
                     </button>
               </div>
+              <?php if (isset($_SESSION['account_operator'])) {?>
               <ul class="main-nav nav navbar-nav navbar-right">
                 <li class="wow fadeInDown" data-wow-delay="0s"><a href="#">Home</a></li>
                 <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="#">Applications</a></li>
                 <li class="wow fadeInDown" data-wow-delay="0.2s"><a href="jobs.php">Jobs</a></li>
-                <li class="wow fadeInDown" data-wow-delay="0.3s"><a href="#">User Accounts</a></li>
+                <li class="wow fadeInDown" data-wow-delay="0.3s"><a href="users.php">User Accounts</a></li>
               </ul>
+            <?php } ?>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
         </nav>
