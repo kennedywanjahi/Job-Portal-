@@ -71,6 +71,15 @@
 		$_SESSION['current_user'] = $user_data['Name'];
 
 	}
+	public function get_mobile($uid){
+		$query = "SELECT Mobile FROM users WHERE Id = $uid";
+
+		$result = $this->db->query($query) or die($this->db->error);
+
+		$user_data = $result->fetch_array(MYSQLI_ASSOC);
+		$_SESSION['user_mobile'] = $user_data['Mobile'];
+
+	}
 
 	/*** starting the session ***/
 	public function get_session(){
