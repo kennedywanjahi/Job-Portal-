@@ -1,4 +1,21 @@
 <?php
+function redirect($location){
+
+
+    return header("Location:" . $location);
+
+
+}
+
+
+
+
+
+
+
+
+
+
 function escape($string) {
 
 global $connection;
@@ -285,6 +302,175 @@ function openPosition()
 }
 
 
+function employerViewUsers()
+{
+  global $connection;
+  $query = "SELECT * FROM employer_accounts WHERE Company_name = '{$_SESSION['company']}'";
+  $select_orders = mysqli_query($connection,$query);
+  while($row = mysqli_fetch_assoc($select_orders)){
+    $id = $row['Id'];
+    $firstName = $row['First_name'];
+    $lastName = $row['Last_name'];
+    $email = $row['Email'];
+    $status = $row['Status'];
+    echo "<tr>";
+                echo "<td class='tbl-logo'><i class='fa fa-user fa-2x'></i></td>";
+                echo "<td class='tbl-title'><h4>{$firstName}{$lastName}</h4></td>";
+                echo "<td><p>$email</p></td>";
+                if ($status == 1) {
+                  echo "<td><p>VERIFIED</p></td>";
+                }
+                else {
+                  echo "<td><p>UNVERIFIED</p></td>";
+                }
+                echo "<td class='tbl-apply'><a href=''>View Applications</a></td>";
+                if ($email!=$_SESSION['account_operator']) {
+                  if ($status == 1) {
+                    echo "<td class='tbl-apply'><a href='users.php?unapprove=$id'>Unapprove Account</a></td>";
+                  }
+                  else {
+                    echo "<td class='tbl-apply'><a href='users.php?approve=$id'>Verify Account</a></td>";
+                  }
+                }
+
+                echo "<td class='tbl-apply'><a href=''>Edit</a></td>";
+                echo "<td class='tbl-apply'><a href='jobs.php?delete=$id'>Delete</a></td>";
+
+
+
+
+
+    echo "</tr>";
+
+
+  }
+}
+
+
+
+
+
+
+
+
+
+function employerUserCount()
+{
+  global $connection;
+  $query = "SELECT * FROM employer_accounts WHERE Company_name = '{$_SESSION['company']}'";
+  $select_employer_accounts = mysqli_query($connection,$query);
+  $employer_accounts_count = mysqli_num_rows($select_employer_accounts);
+  confirmQuery($select_employer_accounts);
+  $_SESSION['employer_accounts'] = $employer_accounts_count;
+}
+
+
+
+
+
+function employerAddUser(){
+  global $connection;
+  $email = $_POST["email"];
+  $fname = $_POST['fname'];
+  $lname = $_POST['lname'];
+  $password = $_POST["password1"];
+  $password2 = $_POST["password2"];
+  $name = $_SESSION['company'];
+  if ($password === $password2) {
+    $password = md5($password);
+    $query = "INSERT INTO employer_accounts (`Email`, `Company_name`, `Password`, `First_name`, `Last_name`)";
+    $query .="VALUES ('{$email}', '{$name}', '{$password}', '{$fname}', '{$lname}' )";
+     $add_employer_account= mysqli_query($connection, $query);
+     if(!$add_employer_account){
+       die("QUERY FAILED" .mysqli_error($connection));
+     }
+     echo "<h1 style='text-align:center;'>User account Added successfully</h1>" ;
+     echo '<script>window.location="./users.php" </script>';
+
+ }else {
+   echo "<h1>Passwords do not match</h1>" ;
+ }
+}
+
+
+
+
+
+
+
+
+
+function employerUnApproveUser(){
+  global $connection;
+  $action = escape($_GET['unapprove']);
+  $query = "UPDATE employer_accounts SET Status = 0  WHERE Id = '$action'";
+  $closePosition = mysqli_query($connection, $query);
+  echo '<script>window.location="./users.php" </script>';
+
+}
+
+
+
+
+
+
+
+
+
+
+function employerApproveUser(){
+  global $connection;
+  $action = escape($_GET['approve']);
+  $query = "UPDATE employer_accounts SET Status = 1  WHERE Id = '$action'";
+  $closePosition = mysqli_query($connection, $query);
+  echo '<script>window.location="./users.php" </script>';
+
+}
+
+
+
+
+
+
+
+
+
+function ViewJobs()
+{
+  global $connection;
+  $query = "SELECT * FROM jobs WHERE Status = 1";
+  $select_jobs = mysqli_query($connection,$query);
+  while($row = mysqli_fetch_assoc($select_jobs)){
+    $job_id = $row['Id'];
+    $companyName = $row['Company'];
+    $jobPosition = $row['Position'];
+    $jobDescription = $row['Description'];
+    $jobQualifications = $row['Qualifications'];
+    $jobStatus = $row['Status'];
+    $companyEmail = $row['Email'];
+    $companyTelephone = $row['Telephone'];
+    $posted = $row['Date_posted'];
+    echo "<tr>";
+                echo "<td class='tbl-logo'><img src='img/job-logo1.png'></td>";
+                echo "<td class='tbl-title'><h4>{$jobPosition}<br><span class='job-type'>{$companyName}</span></h4></td>";
+                echo "<td><p>{$jobQualifications}</p></td>";
+                if ($jobStatus == 1) {
+                  echo "<td><p>AVAILABLE</p></td>";
+                }
+                else {
+                  echo "<td><p>UNAVAILABLE</p></td>";
+                }
+                echo "<td class='tbl-apply'><a href='jobs.php?job_id=$job_id&company=$companyName&position=$jobPosition'>Apply</a></td>";
+
+
+
+
+
+    echo "</tr>";
+
+
+  }
+}
 
 
 
