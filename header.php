@@ -5,6 +5,7 @@ $user = new User();
 if (isset($_SESSION['uid'])) {
 $uid = $_SESSION['uid'];
 $fullname = $user->get_fullname($uid);
+$Mobile = $user->get_Mobile($uid);
 
 }
 
@@ -43,9 +44,9 @@ $fullname = $user->get_fullname($uid);
     </head>
     <body>
 
-        <div id="preloader">
+        <!-- <div id="preloader">
             <div id="status">&nbsp;</div>
-        </div>
+        </div> -->
         <!-- Body content -->
 
         <div class="header-connect">
