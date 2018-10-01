@@ -26,6 +26,7 @@ if (isset($_POST['add_job'])) {
 
  ?><h3 class="page-header" style="text-align:center;">Add Open Job Position</h3>
 <form action="" method="post" enctype="multipart/form-data">
+  <div class="form-group">
   <label for="category">Hiring Company</label>
 <select class="form-control" name="category">
   <?php

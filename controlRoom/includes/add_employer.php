@@ -5,13 +5,12 @@
                                                                                                   addEmployer();
                                                                                                   }
                                                          ?>
-                         <div class="col-md-3">
-                         </div>
-                         <div class="col-md-6">
+
+                         <div class="col-md-12">
 <div class="woocommerce-info"><h2 style="text-align:center">Add Employer Account</h2></a>
 </div>
 
-<form id="" class="" method="post">
+<form id="" class="form-responsive" method="post">
   <div class="form-group">
     <label for="category">Nature of Business</label>
     <select class="form-control" name="category">
