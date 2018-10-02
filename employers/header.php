@@ -104,7 +104,7 @@ include '../functions.php';
               <?php if (isset($_SESSION['account_operator'])) {?>
               <ul class="main-nav nav navbar-nav navbar-right">
                 <li class="wow fadeInDown" data-wow-delay="0s"><a href="#">Home</a></li>
-                <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="#">Applications</a></li>
+                <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="applicants.php">Applicants</a></li>
                 <li class="wow fadeInDown" data-wow-delay="0.2s"><a href="jobs.php">Jobs</a></li>
                 <li class="wow fadeInDown" data-wow-delay="0.3s"><a href="users.php">User Accounts</a></li>
               </ul>
