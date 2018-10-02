@@ -476,4 +476,57 @@ function ViewJobs()
 
 
 
+
+
+
+
+function employerViewApplicants()
+{
+  global $connection;
+  $query = "SELECT * FROM applications WHERE Company_Name = '{$_SESSION['company']}'";
+  $select_orders =
+  mysqli_query($connection,$query);
+  while($row = mysqli_fetch_assoc($select_orders)){
+    $job_id = $row['JobID'];
+    $companyName = $row['Company_Name'];
+    $jobPosition = $row['Position'];
+    $name = $row['Name'];
+    $mobile = $row['UserMobile'];
+    $jobStatus = $row['Status'];
+    $dateApplied = $row['Date_Applied'];
+    echo "<tr>";
+                echo "<td class='tbl-logo'><img src='img/job-logo1.png'></td>";
+                echo "<td class='tbl-title'><h4>{$jobPosition}</h4></td>";
+                echo "<td><p>{$name}</p></td>";
+                echo "<td><p>{$mobile}</p></td>";
+                echo "<td><p>{$dateApplied}</p></td>";
+                // if ($jobStatus == 1) {
+                //   echo "<td><p>AVAILABLE</p></td>";
+                // }
+                // else {
+                //   echo "<td><p>UNAVAILABLE</p></td>";
+                // }
+                // echo "<td class='tbl-apply'><a href=''>View Applications</a></td>";
+                if ($jobStatus == 1) {
+                  echo "<td class='tbl-apply'><a href='applicants.php?shortlist=$job_id'>ShortList</a></td>";
+                }
+                else {
+                  echo "<td class='tbl-apply'><a href='applicants.php?shortlist=$job_id'>Remove From Shortlist</a></td>";
+                }
+                //echo "<td class='tbl-apply'><a href='applicants.php?source=view_profile&user_id=$user_id'>View Profile</a></td>";
+
+
+
+
+
+    echo "</tr>";
+
+
+  }
+}
+
+
+
+
+
  ?>
