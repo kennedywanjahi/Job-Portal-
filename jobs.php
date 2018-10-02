@@ -23,9 +23,12 @@ if (isset($_GET['source'])) {
 
  ?>
 <?php if (isset($_GET['job_id'])){
-                echo $job_id = escape($_GET['job_id']);
-                echo $companyName = escape($_GET['company']);
-                echo $jobPosition = escape($_GET['position']);
+        if (isset($_SESSION[''])) {
+          // code...
+        }
+                $job_id = escape($_GET['job_id']);
+                $companyName = escape($_GET['company']);
+                $jobPosition = escape($_GET['position']);
                 if (isset($_SESSION['current_user'])) {
                   $mobile = $_SESSION['user_mobile'];
                   $name = $_SESSION['current_user'];
