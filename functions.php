@@ -323,7 +323,6 @@ function employerViewUsers()
                 else {
                   echo "<td><p>UNVERIFIED</p></td>";
                 }
-                echo "<td class='tbl-apply'><a href=''>View Applications</a></td>";
                 if ($email!=$_SESSION['account_operator']) {
                   if ($status == 1) {
                     echo "<td class='tbl-apply'><a href='users.php?unapprove=$id'>Unapprove Account</a></td>";
@@ -454,12 +453,6 @@ function ViewJobs()
                 echo "<td class='tbl-logo'><img src='img/job-logo1.png'></td>";
                 echo "<td class='tbl-title'><h4>{$jobPosition}<br><span class='job-type'>{$companyName}</span></h4></td>";
                 echo "<td><p>{$jobQualifications}</p></td>";
-                if ($jobStatus == 1) {
-                  echo "<td><p>AVAILABLE</p></td>";
-                }
-                else {
-                  echo "<td><p>UNAVAILABLE</p></td>";
-                }
                 echo "<td class='tbl-apply'><a href='jobs.php?job_id=$job_id&company=$companyName&position=$jobPosition'>Apply</a></td>";
 
 
@@ -528,5 +521,56 @@ function employerViewApplicants()
 
 
 
+
+
+
+
+
+function ViewJobSeekerApplications()
+{
+  global $connection;
+  $query = "SELECT * FROM applications WHERE Name = '{$_SESSION['current_user']}'";
+  $select_orders =
+  mysqli_query($connection,$query);
+  while($row = mysqli_fetch_assoc($select_orders)){
+    $id = $row['id'];
+    $job_id = $row['JobID'];
+    $companyName = $row['Company_Name'];
+    $jobPosition = $row['Position'];
+    $name = $row['Name'];
+    $user = $_SESSION['current_user'];
+    $mobile = $row['UserMobile'];
+    $jobStatus = $row['Status'];
+    $dateApplied = $row['Date_Applied'];
+    echo "<tr>";
+                echo "<td class='tbl-logo'><img src='img/job-logo1.png'></td>";
+                echo "<td class='tbl-title'><h4>{$jobPosition}</h4></td>";
+                echo "<td><p>Date: {$dateApplied}</p></td>";
+                echo "<td class='tbl-apply'><a href='applications.php?withdraw=$id' onclick='return confirm('Are you sure you want to delete this item?');'>Withdraw</a></td>";
+                if ($jobStatus == 1) {
+                  echo "<td class='tbl-apply'>STATUS: Pending</td>";
+                }
+                else {
+                  echo "<td class='tbl-apply'>STATUS: Shortlisted</td>";
+                }
+    echo "</tr>";
+  }
+}
+
+
+
+
+
+
+
+
+function withdrawApplication()
+{
+  global $connection;
+  $action = escape($_GET['withdraw']);
+  $query = "DELETE FROM applications WHERE id = '$action'";
+  $withdraw = mysqli_query($connection, $query);
+  echo '<script>window.location="applications.php" </script>';
+}
 
  ?>
