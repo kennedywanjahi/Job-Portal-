@@ -22,7 +22,6 @@
         <div class="col-md-3 hidden-sm">
             <div class="job-add wow fadeInRight" data-wow-delay="1.5s">
                 <h2>Seeking a job?</h2>
-                <a href="account.php?source=register">Create a Account</a>
             </div>
         </div>
     </div>
