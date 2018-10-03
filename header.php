@@ -57,7 +57,7 @@ $Mobile = $user->get_Mobile($uid);
                             <p>
                               <?php if (isset($_SESSION['current_user'])) {?>
                                 <span><a href='account.php?source=profile&&user_id=<?php echo $_SESSION['uid']; ?>'><i class='fa fa-user'></i><?php echo $_SESSION['current_user']; ?></a></span>
-                                <span><a href="#"><i class="fa fa-heart"></i>My Applications</a></span>
+                                <span><a href="applications.php"><i class="fa fa-heart"></i>My Applications</a></span>
 				                        <span><a href='account.php?q'><i class='fa fa-power-off'></i> Log Out</a></span>
                               <?php } else {
                                 ?>
