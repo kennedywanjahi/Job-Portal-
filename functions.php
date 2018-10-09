@@ -229,7 +229,7 @@ function employerViewJobs()
                 else {
                   echo "<td><p>UNAVAILABLE</p></td>";
                 }
-                echo "<td class='tbl-apply'><a href=''>View Applications</a></td>";
+                echo "<td class='tbl-apply'><a href='jobs.php?source=view_applicants&id=$job_id&position=$jobPosition'>View Applications</a></td>";
                 if ($jobStatus == 1) {
                   echo "<td class='tbl-apply'><a href='jobs.php?close=$job_id'>Close Availability</a></td>";
                 }
@@ -480,6 +480,7 @@ function employerViewApplicants()
   $select_orders =
   mysqli_query($connection,$query);
   while($row = mysqli_fetch_assoc($select_orders)){
+    $application_id = $row['id'];                                                
     $job_id = $row['JobID'];
     $companyName = $row['Company_Name'];
     $jobPosition = $row['Position'];
@@ -493,18 +494,11 @@ function employerViewApplicants()
                 echo "<td><p>{$name}</p></td>";
                 echo "<td><p>{$mobile}</p></td>";
                 echo "<td><p>{$dateApplied}</p></td>";
-                // if ($jobStatus == 1) {
-                //   echo "<td><p>AVAILABLE</p></td>";
-                // }
-                // else {
-                //   echo "<td><p>UNAVAILABLE</p></td>";
-                // }
-                // echo "<td class='tbl-apply'><a href=''>View Applications</a></td>";
-                if ($jobStatus == 1) {
-                  echo "<td class='tbl-apply'><a href='applicants.php?shortlist=$job_id'>ShortList</a></td>";
+                if ($jobStatus == 0) {
+                  echo "<td class='tbl-apply'><a href='applicants.php?shortlist=$application_id'>ShortList Applicant</a></td>";
                 }
                 else {
-                  echo "<td class='tbl-apply'><a href='applicants.php?shortlist=$job_id'>Remove From Shortlist</a></td>";
+                  echo "<td class='tbl-apply'><a href='applicants.php?withdraw=$application_id'>Remove From Shortlist</a></td>";
                 }
                 //echo "<td class='tbl-apply'><a href='applicants.php?source=view_profile&user_id=$user_id'>View Profile</a></td>";
 
@@ -517,6 +511,11 @@ function employerViewApplicants()
 
   }
 }
+
+
+
+
+
 
 
 
@@ -571,6 +570,112 @@ function withdrawApplication()
   $query = "DELETE FROM applications WHERE id = '$action'";
   $withdraw = mysqli_query($connection, $query);
   echo '<script>window.location="applications.php" </script>';
+}
+
+
+
+
+
+
+
+
+
+function removeFromShortlist()
+{
+   global $connection;
+   $id = escape($_GET['withdraw']);
+  $query = "UPDATE applications SET Status = 0 WHERE id = $id";
+  $shortlist_query = mysqli_query($connection, $query);
+  confirmQuery($shortlist_query);
+  echo "<script>alert('Removed from shortlist Successfully');</script>";
+  echo '<script>window.location="applicants.php" </script>';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+function shortlistApplicant(){
+                              global $connection;
+                              $id = escape($_GET['shortlist']);
+                              $query = "UPDATE applications SET Status = 1 WHERE id = $id";
+                              $shortlist_query = mysqli_query($connection, $query);
+                              confirmQuery($shortlist_query);
+                              echo "<script>alert('Shortlisted Successfully');</script>";
+                              echo '<script>window.location="applicants.php" </script>';
+
+                              }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                              function employerViewJobApplicants()
+{
+  global $connection;
+  $id = escape($_GET['id']);
+  $query = "SELECT * FROM applications WHERE Company_Name = '{$_SESSION['company']}' && JobID = '{$id}'";
+  $select_orders =
+  mysqli_query($connection,$query);
+  confirmQuery($select_orders);
+  while($row = mysqli_fetch_assoc($select_orders)){
+    $application_id = $row['id'];                                                
+    $job_id = $row['JobID'];
+    $companyName = $row['Company_Name'];
+    $jobPosition = $row['Position'];
+    $name = $row['Name'];
+    $mobile = $row['UserMobile'];
+    $jobStatus = $row['Status'];
+    $dateApplied = $row['Date_Applied'];
+    echo "<tr>";
+                echo "<td class='tbl-logo'><img src='img/job-logo1.png'></td>";
+                echo "<td class='tbl-title'><h4>{$jobPosition}</h4></td>";
+                echo "<td><p>{$name}</p></td>";
+                echo "<td><p>{$mobile}</p></td>";
+                echo "<td><p>{$dateApplied}</p></td>";
+                if ($jobStatus == 0) {
+                  echo "<td class='tbl-apply'><a href='applicants.php?shortlist=$application_id'>ShortList Applicant</a></td>";
+                }
+                else {
+                  echo "<td class='tbl-apply'><a href='applicants.php?withdraw=$application_id'>Remove From Shortlist</a></td>";
+                }
+                //echo "<td class='tbl-apply'><a href='applicants.php?source=view_profile&user_id=$user_id'>View Profile</a></td>";
+
+
+
+
+
+    echo "</tr>";
+
+
+  }
 }
 
  ?>

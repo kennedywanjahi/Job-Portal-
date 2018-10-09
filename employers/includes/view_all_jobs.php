@@ -13,7 +13,7 @@
     <div class="row jobs">
         <div class="col-md-12">
             <div class="job-posts table-responsive">
-                <table class="table">
+                <table class="table table-responsive">
                     <tr class="odd wow fadeInUp" data-wow-delay="1s">
                       <?php
                       employerViewJobs();
