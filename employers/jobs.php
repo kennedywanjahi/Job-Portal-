@@ -16,6 +16,9 @@ redirect("index.php");
      case 'add_job':
      include 'includes/add_job.php';
      break;
+     case 'view_applicants':
+     include 'includes/job_applicants.php';
+     break;
        default:
        include 'includes/view_all_jobs.php';
        break;
